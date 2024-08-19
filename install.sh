@@ -1,7 +1,7 @@
 #!/bin/bash
 
-region='auto'
-install_vsc=false
+region=${CPC_REGION:-'auto'}
+install_vsc=${CPC_INS_VSC:-false}
 arch=$(uname -m)
 
 # 字符串染色程序
