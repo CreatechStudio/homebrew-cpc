@@ -79,19 +79,34 @@ brew_tap='createchstudio/cpc'
 install_name='cpc'
 remote='github'
 
+set_chinese_source() {
+	echo "${tty_yellow}🇨🇳 Detected that you are in China, use mirror to download"
+	echo "${tty_reset}"
+	brew_remote='https://gitee.com/ricky-tap/HomebrewCN/raw/master/Homebrew.sh'
+	brew_tap='lightum_cc/cpc https://gitee.com/lightum_cc/homebrew-cpc.git'
+	install_name='cpc-cn'
+	remote='gitee'
+
+	export HOMEBREW_PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
+	export HOMEBREW_API_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api
+	export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+
+}
+
 if is_chinese_ip; then
 	if [ "$region" == "auto" ] || [ "$region" == "china" ]; then
-		echo "${tty_yellow}🇨🇳 Detected that you are in China, use mirror to download"
-		echo "${tty_reset}"
-		brew_remote='https://gitee.com/ricky-tap/HomebrewCN/raw/master/Homebrew.sh'
-		brew_tap='lightum_cc/cpc https://gitee.com/lightum_cc/homebrew-cpc.git'
-		install_name='cpc-cn'
-		remote='gitee'
-
-		export HOMEBREW_PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
-		export HOMEBREW_API_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api
-		export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+		set_chinese_source
 	fi
+fi
+
+if [ "$region" == "auto" ]; then
+	if is_chinese_ip; then
+		set_chinese_source
+	fi
+fi
+
+if [ "$region" == "china" ]; then
+	set_chinese_source
 fi
 
 if runnable brew; then
