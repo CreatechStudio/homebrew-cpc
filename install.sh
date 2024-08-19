@@ -48,7 +48,7 @@ else
 	/bin/bash -c "$(curl -fsSL $brew_remote)"
 fi
 
-echo "Installing..."
+echo "Installing CAIE_Code"
 
 echo "Activating Homebrew"
 if [[ "$arch" == "arm64" ]]; then
