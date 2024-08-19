@@ -47,7 +47,7 @@ else
 	/bin/bash -c "$(curl -fsSL $brew_remote)"
 fi
 
-echo "Installing..."
+echo "Installing CAIE_Code"
 
 brew tap $brew_tap
 brew install $install_name
