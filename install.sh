@@ -66,6 +66,8 @@ remote='github'
 
 if is_chinese_ip; then
 	if [ "$region" == "auto" ] || [ "$region" == "china" ]; then
+		echo "${tty_yellow}🇨🇳 Detected that you are in China, use mirror to download"
+		echo "${tty_reset}"
 		brew_remote='https://gitee.com/ricky-tap/HomebrewCN/raw/master/Homebrew.sh'
 		brew_tap='lightum_cc/cpc https://gitee.com/lightum_cc/homebrew-cpc.git'
 		install_name='cpc-cn'
