@@ -82,7 +82,7 @@ fi
 
 brew tap $brew_tap
 wait $!
-brew install $install_name
+brew install $install_name --json=v2 > /dev/null
 wait
 
 if runnable cpc; then
