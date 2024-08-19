@@ -36,8 +36,8 @@ class CpcCn < Formula
             man1.install_symlink "#{repo_path}/man/cpc.1" => "cpc.1"
         end
 
-        system "cpc", "-c", "remote", "gitee"
-        system "cpc", "-i"
+        system "cpc -c remote gitee"
+        system "cpc -i"
     end
 
     def caveats
