@@ -131,6 +131,9 @@ brew install $install_name && {
 					echo "${tty_blue}⏳ Installing CAIE Pseudocode Extensions"
 					echo "${tty_reset}"
 					"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --install-extension createchstudioshanghaiinc.cpc-interpreter-extension
+					wait $!
+					echo "${tty_green}✅ Install CAIE Pseudocode Extensions successfully"
+					echo "${tty_reset}"
 				else
 					echo "${tty_yellow}⚠️ CAIE Pseudocode Extensions already installed"
 					echo "${tty_reset}"
