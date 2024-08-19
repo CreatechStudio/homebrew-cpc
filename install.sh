@@ -82,19 +82,16 @@ fi
 
 brew tap $brew_tap
 wait $!
-brew install $install_name --json=v2 > /dev/null
-wait
+brew install $install_name && {
+    echo "${tty_cyan}⏳ Installing dependencies"
+    echo "${tty_reset}"
 
-if runnable cpc; then
-	echo "${tty_cyan}⏳ Installing dependencies"
-	echo "${tty_reset}"
+    cpc -c remote $remote
+    wait $!
 
-	cpc -c remote $remote
-	wait $!
-
-	echo "${tty_green}✅ Install CAIE_Code successfully"
-	echo "${tty_reset}"
-else
-	echo "${tty_red}🚨 Failed to install CAIE_Code, try to install manually. "
-	echo "${tty_reset}"
-fi
+    echo "${tty_green}✅ Install CAIE_Code successfully"
+    echo "${tty_reset}"
+} || {
+    echo "${tty_red}🚨 Failed to install CAIE_Code, try to install manually."
+    echo "${tty_reset}"
+}
