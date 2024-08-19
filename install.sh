@@ -3,6 +3,17 @@
 region='auto'
 arch=$(uname -m)
 
+tty_universal() { tty_escape "0;$1"; } #正常显示
+tty_mkbold() { tty_escape "1;$1"; }    #设置高亮
+tty_underline="$(tty_escape "4;39")"   #下划线
+tty_blue="$(tty_universal 34)"         #蓝色
+tty_red="$(tty_universal 31)"          #红色
+tty_green="$(tty_universal 32)"        #绿色
+tty_yellow="$(tty_universal 33)"       #黄色
+tty_bold="$(tty_universal 39)"         #加黑
+tty_cyan="$(tty_universal 36)"         #青色
+tty_reset="$(tty_escape 0)"            #去除颜色
+
 if [ -n "$1" ]; then
 	region="$1"
 fi
@@ -12,17 +23,12 @@ runnable() {
 }
 
 is_chinese_ip() {
-    # 获取当前 IP 地址
     local ip=$(curl -s ifconfig.me)
-
-    # 查询 IP 的地理位置
     local location=$(curl -s "http://ip-api.com/json/${ip}?lang=zh-CN" | grep '"country":"中国"')
 
     if [ -n "$location" ]; then
-        # echo "当前 IP ($ip) 是中国的。"
         return 0
     else
-        # echo "当前 IP ($ip) 不是中国的。"
         return 1
     fi
 }
@@ -34,7 +40,7 @@ remote='github'
 
 if is_chinese_ip; then
 	if [ "$region" == "auto" ] || [ "$region" == "china" ]; then
-		brew_remote='https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh'
+		brew_remote='https://gitee.com/ricky-tap/HomebrewCN/raw/master/Homebrew.sh'
 		brew_tap='lightum_cc/cpc https://gitee.com/lightum_cc/homebrew-cpc.git'
 		install_name='cpc-cn'
 		remote='gitee'
@@ -42,15 +48,25 @@ if is_chinese_ip; then
 fi
 
 if runnable brew; then
-	echo "Homebrew exists"
+	echo -n "
+	${tty_yellow}✅ Homebrew exists"
+	echo "${tty_reset}"
 else
-	echo "Try to install Homebrew for you now"
+	echo -n "
+	${tty_blue}⏳ Try to install Homebrew for you now: "
+	echo "${tty_reset}"
 	/bin/bash -c "$(curl -fsSL $brew_remote)"
+	wait $!
 fi
 
-echo "Installing CAIE_Code"
+echo -n "
+${tty_blue}⏳ Installing CAIE_Code"
+echo "${tty_reset}"
 
-echo "Activating Homebrew"
+echo -n "
+${tty_blue}⏳ Activating Homebrew"
+echo "${tty_reset}"
+
 if [[ "$arch" == "arm64" ]]; then
 	eval $(/opt/homebrew/bin/brew shellenv)
 else
@@ -58,14 +74,23 @@ else
 fi
 
 brew tap $brew_tap
+wait $!
 brew install $install_name
+wait $!
 
 if runnable cpc; then
-	echo "Installing dependencies"
-	cpc -c remote $remote
-	cpc -i
+	echo -n "
+	${tty_cyan}⏳ Installing dependencies"
+	echo "${tty_reset}"
 
-	echo "Install CAIE_Code successfully"
+	cpc -c remote $remote
+	wait $!
+
+	echo -n "
+	${tty_green}✅ Install CAIE_Code successfully"
+	echo "${tty_reset}"
 else
-	echo "Failed to install CAIE_Code, try to install manually. "
+	echo -n "
+	${tty_red}🚨 Failed to install CAIE_Code, try to install manually. "
+	echo "${tty_reset}"
 fi
