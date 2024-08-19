@@ -1,7 +1,7 @@
 class Cpc < Formula
     desc "CAIE_Code project description"
     homepage "https://github.com/iewnfod/CAIE_Code"
-    url "https://github.com/iewnfod/CAIE_Code.git", :using => :git
+    url "https://github.com/iewnfod/CAIE_Code.git"
     version "0.1.4"
 
     depends_on "pypy3.10"
