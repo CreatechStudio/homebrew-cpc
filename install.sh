@@ -78,9 +78,8 @@ fi
 
 brew tap $brew_tap
 wait $!
-brew install $install_name && \
-echo ""
-wait $!
+brew install $install_name
+wait
 
 if runnable cpc; then
 	echo "${tty_cyan}⏳ Installing dependencies"
