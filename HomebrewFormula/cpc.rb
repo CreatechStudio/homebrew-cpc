@@ -9,7 +9,7 @@ class Cpc < Formula
     def install
         # 克隆代码库到临时目录
         repo_path = prefix/"CAIE_Code"
-        system "git", "clone", stable.url, repo_path
+        system "git", "clone", "--branch", "stable", stable.url, repo_path
         cd repo_path do
             # 配置安全目录
             system "git", "config", "--global", "--add", "safe.directory", repo_path
