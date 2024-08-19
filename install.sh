@@ -51,6 +51,10 @@ if is_chinese_ip; then
 		brew_tap='lightum_cc/cpc https://gitee.com/lightum_cc/homebrew-cpc.git'
 		install_name='cpc-cn'
 		remote='gitee'
+
+		export HOMEBREW_PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
+		export HOMEBREW_API_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api
+		export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 	fi
 fi
 
@@ -69,10 +73,6 @@ echo "${tty_reset}"
 
 echo "${tty_blue}⏳ Activating Homebrew"
 echo "${tty_reset}"
-
-export HOMEBREW_PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
-export HOMEBREW_API_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 
 if [[ "$arch" == "arm64" ]]; then
 	eval $(/opt/homebrew/bin/brew shellenv)
