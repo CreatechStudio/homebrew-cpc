@@ -1,6 +1,7 @@
 #!/bin/bash
 
 region='auto'
+arch=$(uname -m)
 
 if [ -n "$1" ]; then
 	region="$1"
@@ -48,6 +49,13 @@ else
 fi
 
 echo "Installing..."
+
+echo "Activating Homebrew"
+if [[ "$arch" == "arm64" ]]; then
+	eval $(/opt/homebrew/bin/brew shellenv)
+else
+	eval $(/usr/local/bin/brew shellenv)
+fi
 
 brew tap $brew_tap
 brew install $install_name
