@@ -1,7 +1,7 @@
 #!/bin/bash
 
-region=${CPC_REGION:-'auto'}
-install_vsc=${CPC_INS_VSC:-false}
+region='auto'
+install_vsc=false
 arch=$(uname -m)
 
 # 字符串染色程序
@@ -114,35 +114,34 @@ brew install $install_name && {
 
     echo "${tty_green}✅ Install CAIE_Code successfully"
     echo "${tty_reset}"
+
+	# 如果需要，安装 Visual Studio Code 及其扩展
+	if [ "$install_vsc" = true ]; then
+		if [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
+			echo "${tty_yellow}✅ Visual Studio Code already installed"
+			echo "${tty_reset}"
+		else
+			echo "${tty_blue}⏳ Installing Visual Studio Code"
+			echo "${tty_reset}"
+			brew install --cask visual-studio-code && {
+				echo "${tty_green}✅ Install Visual Studio Code successfully"
+				echo "${tty_reset}"
+				# 判断扩展是否已安装
+				if ! "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --list-extensions | grep -q "createchstudioshanghaiinc.cpc-interpreter-extension"; then
+					echo "${tty_blue}⏳ Installing CAIE Pseudocode Extensions"
+					echo "${tty_reset}"
+					"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --install-extension createchstudioshanghaiinc.cpc-interpreter-extension
+				else
+					echo "${tty_yellow}⚠️ CAIE Pseudocode Extensions already installed"
+					echo "${tty_reset}"
+				fi
+			} || {
+				echo "${tty_red}🚨 Failed to install Visual Studio Code, try to install manually."
+				echo "${tty_reset}"
+			}
+		fi
+	fi
 } || {
     echo "${tty_red}🚨 Failed to install CAIE_Code, try to install manually."
     echo "${tty_reset}"
 }
-
-# 如果需要，安装 Visual Studio Code 及其扩展
-if [ "$install_vsc" = true ]; then
-    if [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
-        echo "${tty_yellow}✅ Visual Studio Code already installed"
-        echo "${tty_reset}"
-    else
-        echo "${tty_blue}⏳ Installing Visual Studio Code"
-        echo "${tty_reset}"
-        brew install --cask visual-studio-code && {
-            echo "${tty_green}✅ Install Visual Studio Code successfully"
-            echo "${tty_reset}"
-        } || {
-            echo "${tty_red}🚨 Failed to install Visual Studio Code, try to install manually."
-            echo "${tty_reset}"
-        }
-    fi
-
-    # 判断扩展是否已安装
-    if ! "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --list-extensions | grep -q "createchstudioshanghaiinc.cpc-interpreter-extension"; then
-        echo "${tty_blue}⏳ Installing CAIE Pseudocode Extensions"
-		echo "${tty_reset}"
-        "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --install-extension createchstudioshanghaiinc.cpc-interpreter-extension
-    else
-        echo "${tty_yellow}⚠️ CAIE Pseudocode Extensions already installed"
-		echo "${tty_reset}"
-    fi
-fi
