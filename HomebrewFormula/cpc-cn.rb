@@ -35,9 +35,6 @@ class CpcCn < Formula
             # 将 man 手册页符号链接到 Homebrew 的 man 目录
             man1.install_symlink "#{repo_path}/man/cpc.1" => "cpc.1"
         end
-
-        system "cpc -c remote gitee"
-        system "cpc -i"
     end
 
     def caveats
