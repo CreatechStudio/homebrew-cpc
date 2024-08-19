@@ -55,19 +55,19 @@ if is_chinese_ip; then
 fi
 
 if runnable brew; then
-	echo -n "${tty_yellow}✅ Homebrew exists"
+	echo "${tty_yellow}✅ Homebrew exists"
 	echo "${tty_reset}"
 else
-	echo -n "${tty_blue}⏳ Try to install Homebrew for you now: "
+	echo "${tty_blue}⏳ Try to install Homebrew for you now: "
 	echo "${tty_reset}"
 	/bin/bash -c "$(curl -fsSL $brew_remote)"
 	wait $!
 fi
 
-echo -n "${tty_blue}⏳ Installing CAIE_Code"
+echo "${tty_blue}⏳ Installing CAIE_Code"
 echo "${tty_reset}"
 
-echo -n "${tty_blue}⏳ Activating Homebrew"
+echo "${tty_blue}⏳ Activating Homebrew"
 echo "${tty_reset}"
 
 if [[ "$arch" == "arm64" ]]; then
@@ -83,15 +83,15 @@ echo ""
 wait $!
 
 if runnable cpc; then
-	echo -n "${tty_cyan}⏳ Installing dependencies"
+	echo "${tty_cyan}⏳ Installing dependencies"
 	echo "${tty_reset}"
 
 	cpc -c remote $remote
 	wait $!
 
-	echo -n "${tty_green}✅ Install CAIE_Code successfully"
+	echo "${tty_green}✅ Install CAIE_Code successfully"
 	echo "${tty_reset}"
 else
-	echo -n "${tty_red}🚨 Failed to install CAIE_Code, try to install manually. "
+	echo "${tty_red}🚨 Failed to install CAIE_Code, try to install manually. "
 	echo "${tty_reset}"
 fi
