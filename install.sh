@@ -59,6 +59,21 @@ is_chinese_ip() {
     fi
 }
 
+install_vsc_extension() {
+	# 判断扩展是否已安装
+	if ! "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --list-extensions | grep -q "createchstudioshanghaiinc.cpc-interpreter-extension"; then
+		echo "${tty_blue}⏳ Installing CAIE Pseudocode Extensions"
+		echo "${tty_reset}"
+		"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --install-extension createchstudioshanghaiinc.cpc-interpreter-extension
+		wait $!
+		echo "${tty_green}✅ Install CAIE Pseudocode Extensions successfully"
+		echo "${tty_reset}"
+	else
+		echo "${tty_yellow}⚠️ CAIE Pseudocode Extensions already installed"
+		echo "${tty_reset}"
+	fi
+}
+
 brew_remote='https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh'
 brew_tap='createchstudio/cpc'
 install_name='cpc'
@@ -120,24 +135,14 @@ brew install $install_name && {
 		if [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
 			echo "${tty_yellow}✅ Visual Studio Code already installed"
 			echo "${tty_reset}"
+			install_vsc_extension()
 		else
 			echo "${tty_blue}⏳ Installing Visual Studio Code"
 			echo "${tty_reset}"
 			brew install --cask visual-studio-code && {
 				echo "${tty_green}✅ Install Visual Studio Code successfully"
 				echo "${tty_reset}"
-				# 判断扩展是否已安装
-				if ! "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --list-extensions | grep -q "createchstudioshanghaiinc.cpc-interpreter-extension"; then
-					echo "${tty_blue}⏳ Installing CAIE Pseudocode Extensions"
-					echo "${tty_reset}"
-					"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" --install-extension createchstudioshanghaiinc.cpc-interpreter-extension
-					wait $!
-					echo "${tty_green}✅ Install CAIE Pseudocode Extensions successfully"
-					echo "${tty_reset}"
-				else
-					echo "${tty_yellow}⚠️ CAIE Pseudocode Extensions already installed"
-					echo "${tty_reset}"
-				fi
+				install_vsc_extension()
 			} || {
 				echo "${tty_red}🚨 Failed to install Visual Studio Code, try to install manually."
 				echo "${tty_reset}"
