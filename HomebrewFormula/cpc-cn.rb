@@ -1,4 +1,4 @@
-class Cpc < Formula
+class CpcCn < Formula
     desc "CAIE_Code project description"
     homepage "https://gitee.com/ricky-tap/CAIE_Code"
     url "https://gitee.com/ricky-tap/CAIE_Code.git", :using => :git
