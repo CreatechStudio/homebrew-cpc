@@ -39,7 +39,7 @@ class Cpc < Formula
 
     def caveats
         <<~EOS
-            如果你移动了安装目录，请重新运行 Homebrew 安装命令以重新创建符号链接。
+            If you move the installation directory, please rerun the Homebrew installation command to recreate the symbolic link.
         EOS
     end
 
