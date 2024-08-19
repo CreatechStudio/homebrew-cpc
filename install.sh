@@ -135,14 +135,14 @@ brew install $install_name && {
 		if [ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]; then
 			echo "${tty_yellow}✅ Visual Studio Code already installed"
 			echo "${tty_reset}"
-			install_vsc_extension()
+			install_vsc_extension
 		else
 			echo "${tty_blue}⏳ Installing Visual Studio Code"
 			echo "${tty_reset}"
 			brew install --cask visual-studio-code && {
 				echo "${tty_green}✅ Install Visual Studio Code successfully"
 				echo "${tty_reset}"
-				install_vsc_extension()
+				install_vsc_extension
 			} || {
 				echo "${tty_red}🚨 Failed to install Visual Studio Code, try to install manually."
 				echo "${tty_reset}"
