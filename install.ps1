@@ -20,4 +20,4 @@ $tempDir = [System.IO.Path]::GetTempPath()
 $nupkgPath = Join-Path $tempDir $nupkgAsset.name
 Invoke-WebRequest -Uri $nupkgAsset.browser_download_url -OutFile $nupkgPath
 
-choco install caie_code -s "'$tempDir;https://community.chocolatey.org/api/v2/'"
+choco install caie-code -s "'$tempDir;https://community.chocolatey.org/api/v2/'" -y
