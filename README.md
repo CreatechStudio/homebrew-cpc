@@ -18,3 +18,8 @@ brew install cpc
 ```shell
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+* For Windows User
+```powershell
+irm https://atcrea.tech/cpc.ps1 | iex
+```
