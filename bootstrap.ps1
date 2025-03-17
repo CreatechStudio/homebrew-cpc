@@ -8,10 +8,8 @@ if (-not (Test-Admin)) {
     $newProcess = Start-Process powershell -ArgumentList "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; irm https://atcrea.tech/cpc.ps1 | iex" -Verb RunAs -PassThru
     if ($newProcess -eq $null) {
         Write-Error "You must run this script as an administrator"
-        exit
     }
     $newProcess.WaitForExit()
-    exit
 }
 
 $tempDir = [System.IO.Path]::GetTempPath()
@@ -21,3 +19,6 @@ $scriptPath = Join-Path $tempDir "install.ps1"
 Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 & $scriptPath
+
+Write-Output "CAIE_Code Installed Successfully"
+Set-Location $env:USERPROFILE

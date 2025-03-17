@@ -54,7 +54,3 @@ pypy3 -m pip install --upgrade pip
 
 Write-Output "Installing Dependencies"
 cpc -init
-
-Write-Output "CAIE_Code Installed Successfully"
-
-Set-Location $env:USERPROFILE
