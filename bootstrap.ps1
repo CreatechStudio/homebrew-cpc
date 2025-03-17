@@ -10,15 +10,18 @@ if (-not (Test-Admin)) {
         Write-Error "You must run this script as an administrator"
     }
     $newProcess.WaitForExit()
+} else {
+    $tempDir = [System.IO.Path]::GetTempPath()
+    $scriptUrl = "https://cpc.atcrea.tech/install.ps1"
+    $scriptPath = Join-Path $tempDir "install.ps1"
+
+    Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+    & $scriptPath
+
+    Write-Output "CAIE_Code Installed Successfully"
+    Set-Location $env:USERPROFILE
 }
 
-$tempDir = [System.IO.Path]::GetTempPath()
-$scriptUrl = "https://cpc.atcrea.tech/install.ps1"
-$scriptPath = Join-Path $tempDir "install.ps1"
-
-Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-& $scriptPath
-
-Write-Output "CAIE_Code Installed Successfully"
-Set-Location $env:USERPROFILE
+Write-Host "Press any key to exit..."
+[System.Console]::ReadKey() | Out-Null

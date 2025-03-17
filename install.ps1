@@ -43,7 +43,7 @@ if ($location -eq "CN") {
 }
 
 git init
-git remote add origin https://github.com/iewnfod/CAIE_Code.git
+git remote add origin $remote
 git fetch origin
 git reset --hard origin/stable
 git checkout -b stable origin/stable
