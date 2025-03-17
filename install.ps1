@@ -27,18 +27,7 @@ Write-Output "Creating Git Repository"
 
 $toolsdir = "$env:LOCALAPPDATA\CAIE_Code"
 
-function Update-SessionEnvironment {
-    $envKeys = [System.Environment]::GetEnvironmentVariables("User").Keys + [System.Environment]::GetEnvironmentVariables("Machine").Keys
-    foreach ($key in $envKeys) {
-        $envValue = [System.Environment]::GetEnvironmentVariable($key, "User")
-        if (-not $envValue) {
-            $envValue = [System.Environment]::GetEnvironmentVariable($key, "Machine")
-        }
-        Set-Item -Path "Env:\$key" -Value $envValue -ErrorAction SilentlyContinue
-    }
-}
-
-Update-SessionEnvironment
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 git config --global --add safe.directory "$toolsdir\CAIE_Code-stable"
 
