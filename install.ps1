@@ -50,6 +50,7 @@ git checkout -b stable origin/stable
 
 Write-Output "Initializing Pip"
 pypy3 -m ensurepip
+pypy3 -m pip install --upgrade pip
 
 Write-Output "Installing Dependencies"
 cpc -init
