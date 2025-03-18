@@ -7,6 +7,42 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Output "Chocolatey installed successfully"
 }
 
+Write-Output "Detecting Dependencies"
+Write-Output "Checking for Git..."
+if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+    Write-Output "Installing Git..."
+    choco install git -y
+} else {
+    Write-Output "Git is already installed"
+}
+Write-Output "Checking for Python 3..."
+$interpreters = @("python", "python3", "pypy", "pypy3")
+$min_version = [version]"3.10.0"
+$found = $false
+foreach ($exe in $interpreters) {
+    try {
+        if (Get-Command $exe -ErrorAction SilentlyContinue) {
+            $version_string = & $exe --version 2>$null
+            if ($version_string -match "Python (\d+)\.(\d+)\.(\d+)") {
+                $version = [version]"$($matches[1]).$($matches[2]).$($matches[3])"
+                if ($version -ge $min_version) {
+                    $found = $true
+                    break
+                }
+            }
+        }
+    }
+    catch {
+        continue
+    }
+}
+if ($found) { 
+    Write-Output "Python 3 is already installed"
+} else {
+    Write-Output "Installing Python 3..."
+    choco install python -y
+}
+
 $apiUrl = "https://api.github.com/repos/iewnfod/CAIE_Code/releases/latest"
 $releaseInfo = Invoke-RestMethod -Uri $apiUrl -UseBasicParsing
 $nupkgAsset = $releaseInfo.assets | Where-Object { $_.name -like "*.nupkg" } | Select-Object -First 1
