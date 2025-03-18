@@ -14,6 +14,7 @@ if (-not (Test-Admin)) {
     $response = Invoke-WebRequest -Uri "https://cdn.createchstudio.com/cdn-cgi/trace" -UseBasicParsing
     $location = ($response.Content -split "`n" | Where-Object { $_ -match "^loc=" }) -replace "loc=",""
 
+    $tempDir = [System.IO.Path]::GetTempPath()
     if ($location -eq "CN") {
         $scriptUrl = "https://cpc.atcrea.tech/install-cn.ps1"
         $scriptPath = Join-Path $tempDir "install-cn.ps1"
@@ -21,7 +22,6 @@ if (-not (Test-Admin)) {
         $scriptUrl = "https://cpc.atcrea.tech/install.ps1"
         $scriptPath = Join-Path $tempDir "install.ps1"
     }
-    $tempDir = [System.IO.Path]::GetTempPath()
 
     Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
