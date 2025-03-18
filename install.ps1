@@ -19,6 +19,7 @@ Write-Output "Checking for Python 3..."
 $interpreters = @("python", "python3", "pypy", "pypy3")
 $min_version = [version]"3.10.0"
 $found = $false
+$python_exe = ""
 foreach ($exe in $interpreters) {
     try {
         if (Get-Command $exe -ErrorAction SilentlyContinue) {
@@ -27,6 +28,7 @@ foreach ($exe in $interpreters) {
                 $version = [version]"$($matches[1]).$($matches[2]).$($matches[3])"
                 if ($version -ge $min_version) {
                     $found = $true
+                    $python_exe = $exe
                     break
                 }
             }
@@ -41,6 +43,7 @@ if ($found) {
 } else {
     Write-Output "Installing Python 3..."
     choco install python -y
+    $python_exe = "python"
 }
 
 $apiUrl = "https://api.github.com/repos/iewnfod/CAIE_Code/releases/latest"
@@ -58,7 +61,6 @@ $nupkgPath = Join-Path $tempDir $nupkgAsset.name
 Invoke-WebRequest -Uri $nupkgAsset.browser_download_url -OutFile $nupkgPath
 
 choco install caie-code -s "'$tempDir;https://community.chocolatey.org/api/v2/'" -y
-
 
 $toolsdir = "$env:LOCALAPPDATA\CAIE_Code"
 
@@ -78,8 +80,8 @@ git reset --hard origin/stable
 git checkout -b stable origin/stable
 
 Write-Output "Initializing Pip"
-pypy3 -m ensurepip
-pypy3 -m pip install --upgrade pip
+& $python_exe -m ensurepip
+& $python_exe -m pip install --upgrade pip
 
 Write-Output "Installing Dependencies"
 cpc -init
