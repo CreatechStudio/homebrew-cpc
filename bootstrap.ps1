@@ -5,7 +5,7 @@ function Test-Admin {
 }
 
 if (-not (Test-Admin)) {
-    $newProcess = Start-Process powershell -ArgumentList "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; irm https://atcrea.tech/cpc.ps1 | iex" -Verb RunAs -PassThru
+    $newProcess = Start-Process powershell -ArgumentList "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; irm https://atcrea.tech/cpc-win | iex" -Verb RunAs -PassThru
     if ($newProcess -eq $null) {
         Write-Error "You must run this script as an administrator"
     }
