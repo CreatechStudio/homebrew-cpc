@@ -1,0 +1,32 @@
+name: Update Release API
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest release data
+        run: |
+          curl -sSL https://api.github.com/repos/iewnfod/CAIE_Code/releases/latest -o release_api.json
+          if [ ! -s release_api.json ]; then
+            echo "Error: release_api.json is empty! Aborting..." >&2
+            exit 1
+          fi
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add release_api.json
+          git diff --cached --quiet || (git commit -m "Update release_api.json" && git push)

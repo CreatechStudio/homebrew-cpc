@@ -7,7 +7,7 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
     Write-Output "Chocolatey installed successfully"
 }
 
-$apiUrl = "https://api.github.com/repos/iewnfod/CAIE_Code/releases/latest"
+$apiUrl = "https://cpc.atcrea.tech/release_api.json"
 $releaseInfo = Invoke-RestMethod -Uri $apiUrl -UseBasicParsing
 $nupkgAsset = $releaseInfo.assets | Where-Object { $_.name -like "*.nupkg" } | Select-Object -First 1
 
@@ -19,7 +19,8 @@ if ($null -eq $nupkgAsset) {
 Write-Output "Downloading CAIE_Code"
 $tempDir = [System.IO.Path]::GetTempPath()
 $nupkgPath = Join-Path $tempDir $nupkgAsset.name
-Invoke-WebRequest -Uri $nupkgAsset.browser_download_url -OutFile $nupkgPath
+$nupkgWebPath = $nupkgAsset.browser_download_url
+Invoke-WebRequest -Uri "https://github.createchstudio.com/$nupkgWebPath" -OutFile $nupkgPath
 
 choco install caie-code -s "'$tempDir;https://community.chocolatey.org/api/v2/'" -y
 
@@ -32,7 +33,7 @@ git config --global --add safe.directory "$toolsdir\CAIE_Code-stable"
 
 Set-Location "$toolsdir\CAIE_Code-stable"
 
-$remote = "https://github.com/iewnfod/CAIE_Code.git"
+$remote = "https://gitee.com/ricky-tap/CAIE_Code.git"
 
 Write-Output "Initializing Git Repository"
 git init

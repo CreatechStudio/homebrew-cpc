@@ -11,9 +11,17 @@ if (-not (Test-Admin)) {
     }
     $newProcess.WaitForExit()
 } else {
+    $response = Invoke-WebRequest -Uri "https://cdn.createchstudio.com/cdn-cgi/trace" -UseBasicParsing
+    $location = ($response.Content -split "`n" | Where-Object { $_ -match "^loc=" }) -replace "loc=",""
+
+    if ($location -eq "CN") {
+        $scriptUrl = "https://cpc.atcrea.tech/install-cn.ps1"
+        $scriptPath = Join-Path $tempDir "install-cn.ps1"
+    } else {
+        $scriptUrl = "https://cpc.atcrea.tech/install.ps1"
+        $scriptPath = Join-Path $tempDir "install.ps1"
+    }
     $tempDir = [System.IO.Path]::GetTempPath()
-    $scriptUrl = "https://cpc.atcrea.tech/install.ps1"
-    $scriptPath = Join-Path $tempDir "install.ps1"
 
     Invoke-WebRequest -Uri $scriptUrl -OutFile $scriptPath
     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
