@@ -49,10 +49,9 @@ runnable() {
 }
 
 is_chinese_ip() {
-    local ip=$(curl -s ifconfig.me)
-    local location=$(curl -s "http://ip-api.com/json/${ip}?lang=zh-CN" | grep '"country":"中国"')
+    local location=$(curl -s https://cdn.createchstudio.com/cdn-cgi/trace | grep '^loc=' | cut -d= -f2)
 
-    if [ -n "$location" ]; then
+    if [ "$location" == "CN" ]; then
         return 0
     else
         return 1
