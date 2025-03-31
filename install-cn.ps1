@@ -83,7 +83,7 @@ git checkout -b stable origin/stable
 
 Write-Output "Initializing Pip"
 & $python_exe -m ensurepip
-& $python_exe -m pip install --upgrade pip
+& $python_exe -m pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/
 
 Write-Output "Installing Dependencies"
 cpc -init
