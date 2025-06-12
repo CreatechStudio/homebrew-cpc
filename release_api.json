@@ -65,7 +65,7 @@
       "state": "uploaded",
       "size": 9402,
       "digest": null,
-      "download_count": 10,
+      "download_count": 12,
       "created_at": "2025-03-30T12:31:40Z",
       "updated_at": "2025-03-30T12:31:40Z",
       "browser_download_url": "https://github.com/iewnfod/CAIE_Code/releases/download/v0.1.4-cbb1ea0/caie-code.0.1.4.nupkg"
