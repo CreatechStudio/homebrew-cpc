@@ -11,7 +11,7 @@ Write-Output "Detecting Dependencies"
 Write-Output "Checking for Git..."
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-Output "Installing Git..."
-    choco install git -y
+    choco install git -y --force
 } else {
     Write-Output "Git is already installed"
 }
@@ -42,7 +42,7 @@ if ($found) {
     Write-Output "Python 3 is already installed"
 } else {
     Write-Output "Installing Python 3..."
-    choco install python -y
+    choco install python -y --force
     $python_exe = "python"
 }
 
@@ -61,7 +61,7 @@ $nupkgPath = Join-Path $tempDir $nupkgAsset.name
 $nupkgWebPath = $nupkgAsset.browser_download_url
 Invoke-WebRequest -Uri "https://github.createchstudio.com/$nupkgWebPath" -OutFile $nupkgPath
 
-choco install caie-code -s "'$tempDir;https://community.chocolatey.org/api/v2/'" -y
+choco install caie-code -s "'$tempDir;https://community.chocolatey.org/api/v2/'" -y --force
 
 
 $toolsdir = "$env:LOCALAPPDATA\CAIE_Code"
