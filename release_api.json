@@ -1,9 +1,9 @@
 {
-  "url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/209205750",
-  "assets_url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/209205750/assets",
-  "upload_url": "https://uploads.github.com/repos/iewnfod/CAIE_Code/releases/209205750/assets{?name,label}",
-  "html_url": "https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-cbb1ea0",
-  "id": 209205750,
+  "url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/320343789",
+  "assets_url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/320343789/assets",
+  "upload_url": "https://uploads.github.com/repos/iewnfod/CAIE_Code/releases/320343789/assets{?name,label}",
+  "html_url": "https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-afe1ba8",
+  "id": 320343789,
   "author": {
     "login": "github-actions[bot]",
     "id": 41898282,
@@ -25,21 +25,21 @@
     "user_view_type": "public",
     "site_admin": false
   },
-  "node_id": "RE_kwDOJ0Sarc4MeDn2",
-  "tag_name": "v0.1.4-cbb1ea0",
+  "node_id": "RE_kwDOJ0Sarc4TGA7t",
+  "tag_name": "v0.1.4-afe1ba8",
   "target_commitish": "stable",
-  "name": "v0.1.4-cbb1ea0",
+  "name": "v0.1.4-afe1ba8",
   "draft": false,
   "immutable": false,
   "prerelease": false,
-  "created_at": "2025-03-30T12:31:16Z",
-  "updated_at": "2025-03-30T12:31:40Z",
-  "published_at": "2025-03-30T12:31:40Z",
+  "created_at": "2026-05-11T08:53:06Z",
+  "updated_at": "2026-05-11T08:53:37Z",
+  "published_at": "2026-05-11T08:53:35Z",
   "assets": [
     {
-      "url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/assets/242039431",
-      "id": 242039431,
-      "node_id": "RA_kwDOJ0Sarc4ObTqH",
+      "url": "https://api.github.com/repos/iewnfod/CAIE_Code/releases/assets/417292884",
+      "id": 417292884,
+      "node_id": "RA_kwDOJ0Sarc4Y32JU",
       "name": "caie-code.0.1.4.nupkg",
       "label": "",
       "uploader": {
@@ -65,16 +65,16 @@
       },
       "content_type": "raw",
       "state": "uploaded",
-      "size": 9402,
-      "digest": null,
-      "download_count": 119,
-      "created_at": "2025-03-30T12:31:40Z",
-      "updated_at": "2025-03-30T12:31:40Z",
-      "browser_download_url": "https://github.com/iewnfod/CAIE_Code/releases/download/v0.1.4-cbb1ea0/caie-code.0.1.4.nupkg"
+      "size": 9401,
+      "digest": "sha256:f6828d492e59e23876e4fecbd3e666cbfefa397c5d9ed3e66f3dd1831476318f",
+      "download_count": 2,
+      "created_at": "2026-05-11T08:53:36Z",
+      "updated_at": "2026-05-11T08:53:37Z",
+      "browser_download_url": "https://github.com/iewnfod/CAIE_Code/releases/download/v0.1.4-afe1ba8/caie-code.0.1.4.nupkg"
     }
   ],
-  "tarball_url": "https://api.github.com/repos/iewnfod/CAIE_Code/tarball/v0.1.4-cbb1ea0",
-  "zipball_url": "https://api.github.com/repos/iewnfod/CAIE_Code/zipball/v0.1.4-cbb1ea0",
-  "body": "## What's Changed\n* Update to Stable by @lightumcc in https://github.com/iewnfod/CAIE_Code/pull/120\n\n\n**Full Changelog**: https://github.com/iewnfod/CAIE_Code/compare/v0.1.4-e9ed8d5...v0.1.4-cbb1ea0",
+  "tarball_url": "https://api.github.com/repos/iewnfod/CAIE_Code/tarball/v0.1.4-afe1ba8",
+  "zipball_url": "https://api.github.com/repos/iewnfod/CAIE_Code/zipball/v0.1.4-afe1ba8",
+  "body": "## What's Changed\n* Update issue template with English translations by @lightumcc in https://github.com/iewnfod/CAIE_Code/pull/124\n\n\n**Full Changelog**: https://github.com/iewnfod/CAIE_Code/compare/v0.1.4-cbb1ea0...v0.1.4-afe1ba8",
   "mentions_count": 1
 }
